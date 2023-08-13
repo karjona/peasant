@@ -1,14 +1,30 @@
 {
   "name": "peasant",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "Peasant of the Land: Pay Your Due is a JS time management game for the js13kGames 2023 competition",
+  "keywords": [
+    "game",
+    "gamedev",
+    "js13kgames",
+    "js13k",
+    "time-management"
+  ],
+  "homepage": "https://github.com/karjona/peasant#readme",
+  "bugs": {
+    "url": "https://github.com/karjona/peasant/issues"
+  },
+  "license": "Apache-2.0",
+  "author": "Kilian Arjona (https://about.me/karjona)",
+  "repository": "github:karjona/peasant",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@tsconfig/node18": "^18.2.0",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "eslint": "^8.47.0",
