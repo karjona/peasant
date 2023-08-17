@@ -1,4 +1,5 @@
 import { initFont, font } from "tinyfont";
+import { createPlayer } from "../objects/Player.js";
 import type Key from "../types/Keys.d.ts";
 
 export const canvas = document.querySelector("#g") as HTMLCanvasElement;
@@ -16,3 +17,11 @@ export const keys: Key = {
   KeyA: false,
   KeyD: false,
 };
+
+// create player in the center of the canvas
+// keep in mind that the player width is 16 and the height is 32
+
+export const player = createPlayer(
+  canvas.width / 2 - 8,
+  canvas.height / 2 - 16,
+);
