@@ -1,6 +1,8 @@
 import { initFont, font } from "tinyfont";
 import { createPlayer } from "../objects/Player.js";
 import type Key from "../types/Keys.d.ts";
+import type Mouse from "../types/Mouse.d.ts";
+import { playerHeight, playerWidth } from "./Constants.js";
 
 export const canvas = document.querySelector("#g") as HTMLCanvasElement;
 export const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -18,10 +20,13 @@ export const keys: Key = {
   KeyD: false,
 };
 
-// create player in the center of the canvas
-// keep in mind that the player width is 16 and the height is 32
+export const mouse: Mouse = {
+  x: 0,
+  y: 0,
+  Main: false,
+};
 
 export const player = createPlayer(
-  canvas.width / 2 - 8,
-  canvas.height / 2 - 16,
+  canvas.width / 2 - playerWidth / 2,
+  canvas.height / 2 - playerHeight / 2,
 );

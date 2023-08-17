@@ -7,7 +7,7 @@ import {
 import { GameConfig } from "./code/data/GameConfig.js";
 import { canvas, ctx, player } from "./code/data/Instances.ts";
 import drawText from "./code/functions/drawText.ts";
-import { keys } from "./code/data/Instances.ts";
+import { keys, mouse } from "./code/data/Instances.ts";
 import { initControls } from "./code/functions/Controls.ts";
 
 // set startTime to right now
@@ -20,8 +20,8 @@ function gameLoop() {
   const time = Math.floor((Date.now() - GameConfig.startTime) / 1000);
   drawText(`Time: ${time.toString()}`, 0, 0);
 
-  handleInput();
   drawPlayer();
+  handleInput();
 }
 
 function handleInput() {
@@ -40,7 +40,12 @@ function handleInput() {
   if (keys.ArrowRight || keys.KeyD) {
     player.x += playerSpeed;
   }
+
+  if (mouse.Main) {
+    drawText("Click", mouse.x, mouse.y, "white");
+  }
 }
+
 function drawPlayer() {
   ctx.fillStyle = "red";
   ctx.fillRect(player.x, player.y, player.width, player.height);
