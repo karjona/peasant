@@ -7,4 +7,4 @@ export const playerWidth = 16;
 export const playerHeight = 32;
 export const tileSize = 16;
 
-export const playerSpeed = 5;
+export const playerSpeed = 2;
