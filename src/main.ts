@@ -3,6 +3,8 @@ import {
   canvasWidth,
   canvasHeight,
   playerSpeed,
+  playerHeight,
+  playerWidth,
 } from "./code/data/Constants.ts";
 import { GameConfig } from "./code/data/GameConfig.ts";
 import { canvas, ctx, player } from "./code/data/Instances.ts";
@@ -45,6 +47,11 @@ function handleInput() {
   if (keys.ArrowRight || keys.KeyD) {
     player.x += playerSpeed;
   }
+
+  const maxX = map.cols * map.tileSize - playerWidth;
+  const maxY = map.rows * map.tileSize - playerHeight;
+  player.x = Math.max(0, Math.min(player.x, maxX));
+  player.y = Math.max(0, Math.min(player.y, maxY));
 
   if (mouse.Main) {
     drawText("Click", mouse.x, mouse.y, "white");
