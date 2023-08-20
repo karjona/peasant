@@ -3,6 +3,7 @@ import { createPlayer } from "../objects/Player.js";
 import type Key from "../types/Keys.d.ts";
 import type Mouse from "../types/Mouse.d.ts";
 import { playerHeight, playerWidth } from "./Constants.js";
+import { createCamera } from "../modules/Map/Camera.js";
 
 export const canvas = document.querySelector("#g") as HTMLCanvasElement;
 export const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -30,3 +31,5 @@ export const player = createPlayer(
   canvas.width / 2 - playerWidth / 2,
   canvas.height / 2 - playerHeight / 2,
 );
+
+export const camera = createCamera(320, 180);

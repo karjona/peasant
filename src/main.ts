@@ -3,13 +3,11 @@ import {
   canvasWidth,
   canvasHeight,
   playerSpeed,
-  playerHeight,
-  playerWidth,
 } from "./code/data/Constants.ts";
 import { GameConfig } from "./code/data/GameConfig.ts";
 import { canvas, ctx, player } from "./code/data/Instances.ts";
 import drawText from "./code/functions/drawText.ts";
-import { keys, mouse } from "./code/data/Instances.ts";
+import { keys, mouse, camera } from "./code/data/Instances.ts";
 import { initControls } from "./code/functions/Controls.ts";
 import tileMap from "./img/tilemap.webp";
 import { map } from "./code/modules/Map/Map.ts";
@@ -29,6 +27,7 @@ function gameLoop() {
   render();
   drawPlayer();
   handleInput();
+  camera.update();
 }
 
 function handleInput() {
@@ -48,8 +47,8 @@ function handleInput() {
     player.x += playerSpeed;
   }
 
-  const maxX = map.cols * map.tileSize - playerWidth;
-  const maxY = map.rows * map.tileSize - playerHeight;
+  const maxX = map.cols * map.tileSize;
+  const maxY = map.rows * map.tileSize;
   player.x = Math.max(0, Math.min(player.x, maxX));
   player.y = Math.max(0, Math.min(player.y, maxY));
 
@@ -60,13 +59,27 @@ function handleInput() {
 
 function drawPlayer() {
   ctx.fillStyle = "red";
-  ctx.fillRect(player.x, player.y, player.width, player.height);
+  ctx.fillRect(
+    player.screenX - player.width / 2,
+    player.screenY - player.height / 2,
+    player.width,
+    player.height,
+  );
 }
 
 function render() {
-  for (let c = 0; c < map.cols; c++) {
-    for (let r = 0; r < map.rows; r++) {
+  const startCol = Math.ceil(camera.x / map.tileSize);
+  const endCol = startCol + camera.width / map.tileSize;
+  const startRow = Math.ceil(camera.y / map.tileSize);
+  const endRow = startRow + camera.height / map.tileSize;
+  const offsetX = -camera.x + startCol * map.tileSize;
+  const offsetY = -camera.y + startRow * map.tileSize;
+
+  for (let c = startCol; c < endCol; c++) {
+    for (let r = startRow; r < endRow; r++) {
       const tile = map.getTile(c, r);
+      const x = (c - startCol) * map.tileSize + offsetX;
+      const y = (r - startRow) * map.tileSize + offsetY;
       if (tile !== 0) {
         ctx.drawImage(
           img,
@@ -74,8 +87,8 @@ function render() {
           0,
           map.tileSize,
           map.tileSize,
-          c * map.tileSize,
-          r * map.tileSize,
+          Math.round(x),
+          Math.round(y),
           map.tileSize,
           map.tileSize,
         );
