@@ -68,10 +68,10 @@ function drawPlayer() {
 }
 
 function render() {
-  const startCol = Math.ceil(camera.x / map.tileSize);
-  const endCol = startCol + camera.width / map.tileSize;
-  const startRow = Math.ceil(camera.y / map.tileSize);
-  const endRow = startRow + camera.height / map.tileSize;
+  const startCol = Math.ceil(camera.x / map.tileSize) - 1;
+  const endCol = startCol + camera.width / map.tileSize + 1;
+  const startRow = Math.ceil(camera.y / map.tileSize) - 1;
+  const endRow = startRow + camera.height / map.tileSize + 1;
   const offsetX = -camera.x + startCol * map.tileSize;
   const offsetY = -camera.y + startRow * map.tileSize;
 
