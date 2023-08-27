@@ -5,10 +5,17 @@ import {
   playerSpeed,
 } from "./code/data/Constants.ts";
 import { GameConfig } from "./code/data/GameConfig.ts";
-import { canvas, ctx, player } from "./code/data/Instances.ts";
+import {
+  canvas,
+  ctx,
+  player,
+  keys,
+  mouse,
+  camera,
+} from "./code/data/Instances.ts";
 import drawText from "./code/functions/drawText.ts";
-import { keys, mouse, camera } from "./code/data/Instances.ts";
 import { initControls } from "./code/functions/Controls.ts";
+import { playMusic, playClick } from "./code/functions/Sound.ts";
 import tileMap from "./img/tilemap.webp";
 import { map } from "./code/modules/Map/Map.ts";
 
@@ -53,7 +60,15 @@ function handleInput() {
   player.y = Math.max(0, Math.min(player.y, maxY));
 
   if (mouse.Main) {
+    if (!GameConfig.musicPlaying && GameConfig.soundEnabled) {
+      GameConfig.musicPlaying = true;
+      playMusic();
+    }
+
     drawText("Click", mouse.x, mouse.y, "white");
+    if (GameConfig.soundEnabled) {
+      playClick();
+    }
   }
 }
 

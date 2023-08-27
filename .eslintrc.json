@@ -10,5 +10,10 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
-  "ignorePatterns": ["node_modules/", "dist/", "vite.config.ts"]
+  "ignorePatterns": [
+    "node_modules/",
+    "dist/",
+    "vite.config.ts",
+    "src/code/lib/"
+  ]
 }
