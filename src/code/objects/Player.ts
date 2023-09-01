@@ -1,6 +1,6 @@
 import { Entity } from "./Entity.js";
 import { playerHeight, playerWidth } from "../data/Constants.js";
-import { ctx, player } from "../data/Instances.js";
+import { ctx } from "../data/Instances.js";
 
 export class Player extends Entity {
   screenX: number;
@@ -18,10 +18,10 @@ export class Player extends Entity {
     this.render = () => {
       ctx.fillStyle = "red";
       ctx.fillRect(
-        player.screenX - player.width / 2,
-        player.screenY - player.height / 2,
-        player.width,
-        player.height,
+        this.screenX - this.width / 2,
+        this.screenY - this.height / 2,
+        this.width,
+        this.height,
       );
     };
   }
