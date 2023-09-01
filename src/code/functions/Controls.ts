@@ -2,7 +2,6 @@ import { keys, mouse, player, map } from "../data/Instances.js";
 import { playerSpeed } from "../data/Constants.js";
 import { GameConfig } from "../data/GameConfig.js";
 import { playClick, playMusic } from "./Sound.js";
-import drawText from "./drawText.js";
 
 export function initControls(canvas: HTMLCanvasElement) {
   canvas.addEventListener("click", handleClick);
@@ -86,7 +85,6 @@ export function handleInput() {
       playMusic();
     }
 
-    drawText("Click", mouse.x, mouse.y, "white");
     if (GameConfig.soundEnabled) {
       playClick();
     }

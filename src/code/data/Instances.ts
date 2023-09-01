@@ -6,6 +6,7 @@ import { Camera } from "../objects/Camera.js";
 import type Key from "../types/Keys.d.ts";
 import type Mouse from "../types/Mouse.d.ts";
 import { playerHeight, playerWidth } from "./Constants.js";
+import { Scoreboard } from "../modules/Scoreboard/Scoreboard.js";
 
 export const canvas = document.querySelector("#g") as HTMLCanvasElement;
 export const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -39,3 +40,6 @@ entities.push(player);
 
 export const map = new Map();
 export const camera = new Camera(320, 180);
+
+export const scoreboard = new Scoreboard();
+entities.push(scoreboard);
