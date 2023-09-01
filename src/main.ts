@@ -4,7 +4,13 @@ import {
   canvasHeight,
 } from "./code/data/Constants.ts";
 import { GameConfig } from "./code/data/GameConfig.ts";
-import { canvas, ctx, entities, camera, map } from "./code/data/Instances.ts";
+import {
+  canvas,
+  ctx,
+  entities,
+  camera,
+  layers,
+} from "./code/data/Instances.ts";
 import { initControls, handleInput } from "./code/functions/Controls.ts";
 
 GameConfig.startTime = Date.now();
@@ -26,7 +32,10 @@ function update() {
 
 function render() {
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  map.render();
+
+  layers.forEach((layer) => {
+    layer.render();
+  });
 
   entities.forEach((entity) => {
     entity.render();
