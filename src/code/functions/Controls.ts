@@ -1,6 +1,5 @@
-import { keys, mouse, player } from "../data/Instances.js";
+import { keys, mouse, player, map } from "../data/Instances.js";
 import { playerSpeed } from "../data/Constants.js";
-import { map } from "../modules/Map/Map.js";
 import { GameConfig } from "../data/GameConfig.js";
 import { playClick, playMusic } from "./Sound.js";
 import drawText from "./drawText.js";

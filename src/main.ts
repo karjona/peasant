@@ -4,10 +4,9 @@ import {
   canvasHeight,
 } from "./code/data/Constants.ts";
 import { GameConfig } from "./code/data/GameConfig.ts";
-import { canvas, ctx, entities, camera } from "./code/data/Instances.ts";
+import { canvas, ctx, entities, camera, map } from "./code/data/Instances.ts";
 import drawText from "./code/functions/drawText.ts";
 import { initControls, handleInput } from "./code/functions/Controls.ts";
-import { map } from "./code/modules/Map/Map.js";
 
 GameConfig.startTime = Date.now();
 initControls(canvas);

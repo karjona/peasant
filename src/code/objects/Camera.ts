@@ -1,5 +1,4 @@
-import { player } from "../data/Instances.ts";
-import { map } from "../modules/Map/Map.ts";
+import { player, map } from "../data/Instances.ts";
 
 export class Camera {
   x: number;
