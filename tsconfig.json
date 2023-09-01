@@ -3,7 +3,8 @@
   "compilerOptions": {
     "lib": ["es2023", "dom"],
     "noEmit": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "allowImportingTsExtensions": true
   },
   "include": ["src"]
 }
