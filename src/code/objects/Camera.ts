@@ -1,25 +1,23 @@
-import { player } from "../../data/Instances.js";
-import { map } from "./Map.js";
+import { player } from "../data/Instances.ts";
+import { map } from "../modules/Map/Map.ts";
 
-interface Camera {
+export class Camera {
   x: number;
   y: number;
-  width: number;
-  height: number;
   maxX: number;
   maxY: number;
+  width: number;
+  height: number;
   update: () => void;
-}
+  constructor(width: number, height: number) {
+    this.x = 0;
+    this.y = 0;
+    this.width = width;
+    this.height = height;
+    this.maxX = map.cols * map.tileSize - width;
+    this.maxY = map.rows * map.tileSize - height;
 
-export function createCamera(width: number, height: number): Camera {
-  return {
-    x: 0,
-    y: 0,
-    width,
-    height,
-    maxX: map.cols * map.tileSize - width,
-    maxY: map.rows * map.tileSize - height,
-    update() {
+    this.update = () => {
       player.screenX = this.width / 2;
       player.screenY = this.height / 2;
       this.x = player.x - this.width / 2;
@@ -38,6 +36,6 @@ export function createCamera(width: number, height: number): Camera {
       ) {
         player.screenY = player.y - this.y;
       }
-    },
-  };
+    };
+  }
 }

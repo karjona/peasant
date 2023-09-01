@@ -4,7 +4,7 @@ import { Entity } from "../objects/Entity.js";
 import type Key from "../types/Keys.d.ts";
 import type Mouse from "../types/Mouse.d.ts";
 import { playerHeight, playerWidth } from "./Constants.js";
-import { createCamera } from "../modules/Map/Camera.js";
+import { Camera } from "../objects/Camera.js";
 
 export const canvas = document.querySelector("#g") as HTMLCanvasElement;
 export const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -36,4 +36,4 @@ export const player = new Player(
 );
 entities.push(player);
 
-export const camera = createCamera(320, 180);
+export const camera = new Camera(320, 180);

@@ -1,9 +1,16 @@
+import { camera, ctx } from "../../data/Instances.js";
+import tileMap from "../../../img/tilemap.webp";
+
+const img = new Image();
+img.src = tileMap;
+
 interface Map {
   cols: number;
   rows: number;
   tileSize: number;
   tiles: number[];
   getTile: (col: number, row: number) => number;
+  render: () => void;
 }
 
 export const map: Map = {
@@ -37,7 +44,38 @@ export const map: Map = {
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
   ],
+
   getTile: function (col: number, row: number) {
     return this.tiles[row * map.cols + col];
+  },
+
+  render: function () {
+    const startCol = Math.ceil(camera.x / map.tileSize) - 1;
+    const endCol = startCol + camera.width / map.tileSize + 1;
+    const startRow = Math.ceil(camera.y / map.tileSize) - 1;
+    const endRow = startRow + camera.height / map.tileSize + 1;
+    const offsetX = -camera.x + startCol * map.tileSize;
+    const offsetY = -camera.y + startRow * map.tileSize;
+
+    for (let c = startCol; c < endCol; c++) {
+      for (let r = startRow; r < endRow; r++) {
+        const tile = map.getTile(c, r);
+        const x = (c - startCol) * map.tileSize + offsetX;
+        const y = (r - startRow) * map.tileSize + offsetY;
+        if (tile !== 0) {
+          ctx.drawImage(
+            img,
+            (tile - 1) * map.tileSize,
+            0,
+            map.tileSize,
+            map.tileSize,
+            Math.round(x),
+            Math.round(y),
+            map.tileSize,
+            map.tileSize,
+          );
+        }
+      }
+    }
   },
 };
