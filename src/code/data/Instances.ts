@@ -1,5 +1,6 @@
 import { initFont, font } from "tinyfont";
-import { createPlayer } from "../objects/Player.js";
+import { Player } from "../objects/Player.js";
+import { Entity } from "../objects/Entity.js";
 import type Key from "../types/Keys.d.ts";
 import type Mouse from "../types/Mouse.d.ts";
 import { playerHeight, playerWidth } from "./Constants.js";
@@ -27,9 +28,12 @@ export const mouse: Mouse = {
   Main: false,
 };
 
-export const player = createPlayer(
+export const entities: Entity[] = [];
+
+export const player = new Player(
   canvas.width / 2 - playerWidth / 2,
   canvas.height / 2 - playerHeight / 2,
 );
+entities.push(player);
 
 export const camera = createCamera(320, 180);

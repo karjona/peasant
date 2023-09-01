@@ -1,21 +1,28 @@
+import { Entity } from "./Entity.js";
 import { playerHeight, playerWidth } from "../data/Constants.js";
+import { ctx, player } from "../data/Instances.js";
 
-interface Player {
-  x: number;
-  y: number;
+export class Player extends Entity {
   screenX: number;
   screenY: number;
-  width: number;
-  height: number;
-}
 
-export function createPlayer(x: number, y: number): Player {
-  return {
-    x,
-    y,
-    screenX: 0,
-    screenY: 0,
-    width: playerWidth,
-    height: playerHeight,
-  };
+  constructor(x: number, y: number) {
+    super();
+    this.x = x;
+    this.y = y;
+    this.screenX = 0;
+    this.screenY = 0;
+    this.width = playerWidth;
+    this.height = playerHeight;
+
+    this.render = () => {
+      ctx.fillStyle = "red";
+      ctx.fillRect(
+        player.screenX - player.width / 2,
+        player.screenY - player.height / 2,
+        player.width,
+        player.height,
+      );
+    };
+  }
 }

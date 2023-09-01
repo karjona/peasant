@@ -1,4 +1,9 @@
-import { keys, mouse } from "../data/Instances.js";
+import { keys, mouse, player } from "../data/Instances.js";
+import { playerSpeed } from "../data/Constants.js";
+import { map } from "../modules/Map/Map.js";
+import { GameConfig } from "../data/GameConfig.js";
+import { playClick, playMusic } from "./Sound.js";
+import drawText from "./drawText.js";
 
 export function initControls(canvas: HTMLCanvasElement) {
   canvas.addEventListener("click", handleClick);
@@ -52,4 +57,39 @@ function handleClick(event: MouseEvent) {
   event.preventDefault();
   event.stopPropagation();
   (event.currentTarget as HTMLCanvasElement).focus();
+}
+
+export function handleInput() {
+  if (keys["ArrowUp"] || keys["KeyW"]) {
+    player.y -= playerSpeed;
+  }
+
+  if (keys["ArrowDown"] || keys["KeyS"]) {
+    player.y += playerSpeed;
+  }
+
+  if (keys["ArrowLeft"] || keys["KeyA"]) {
+    player.x -= playerSpeed;
+  }
+
+  if (keys["ArrowRight"] || keys["KeyD"]) {
+    player.x += playerSpeed;
+  }
+
+  const maxX = map.cols * map.tileSize;
+  const maxY = map.rows * map.tileSize;
+  player.x = Math.max(0, Math.min(player.x, maxX));
+  player.y = Math.max(0, Math.min(player.y, maxY));
+
+  if (mouse.Main) {
+    if (!GameConfig.musicPlaying && GameConfig.soundEnabled) {
+      GameConfig.musicPlaying = true;
+      playMusic();
+    }
+
+    drawText("Click", mouse.x, mouse.y, "white");
+    if (GameConfig.soundEnabled) {
+      playClick();
+    }
+  }
 }
